@@ -16,7 +16,8 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionExit_triggered();
+
+    void update_port_list();
 
 private:
     Ui::MainWindow *ui;

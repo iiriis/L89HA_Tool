@@ -17,9 +17,19 @@ public:
 
 private slots:
 
+    void initWidegtStates();
+
     void update_port_list();
+
+    void onSerialPortSelected(QAction *action);
+    void onBaudSelected(QAction *action);
+
+    void on_actionConnect_triggered();
+
+    void handleSerialReceive();
 
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

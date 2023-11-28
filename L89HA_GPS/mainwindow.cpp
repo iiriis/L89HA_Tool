@@ -26,10 +26,8 @@ MainWindow::MainWindow(QWidget *parent)
     /* trigger when action of menu baud or sub-menu of menu baud is selected */
     connect(ui->menuBaud, &QMenu::triggered, this, &MainWindow::onBaudSelected);
 
-
     /* Connect the readyRead() signal to a slot */
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::handleSerialReceive);
-
 
 }
 
@@ -127,7 +125,9 @@ void MainWindow::onBaudSelected(QAction *action){
     serialPort.setBaudRate(action->text().toLong());
 }
 
-/* Callback function to connect to the Serial Port */
+/* Callback function to connect to the Serial Port
+ * when connect is clicked
+ */
 void MainWindow::on_actionConnect_triggered()
 {
     serialPort.close();

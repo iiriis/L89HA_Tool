@@ -17,7 +17,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -37,9 +36,9 @@ public:
     QAction *action921600_bps_2;
     QAction *action2000000bps;
     QAction *actionConnect;
+    QAction *actionTerminal;
     QWidget *centralwidget;
     QGridLayout *gridLayout;
-    QTextBrowser *textBrowser;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuTools;
@@ -90,15 +89,12 @@ public:
         action2000000bps->setCheckable(true);
         actionConnect = new QAction(MainWindow);
         actionConnect->setObjectName("actionConnect");
+        actionTerminal = new QAction(MainWindow);
+        actionTerminal->setObjectName("actionTerminal");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         gridLayout = new QGridLayout(centralwidget);
         gridLayout->setObjectName("gridLayout");
-        textBrowser = new QTextBrowser(centralwidget);
-        textBrowser->setObjectName("textBrowser");
-
-        gridLayout->addWidget(textBrowser, 0, 0, 1, 1);
-
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -122,6 +118,7 @@ public:
         menubar->addAction(menuTools->menuAction());
         menubar->addAction(menuSettings->menuAction());
         menuFile->addAction(actionExit);
+        menuTools->addAction(actionTerminal);
         menuSettings->addAction(menuPort->menuAction());
         menuSettings->addAction(menuBaud->menuAction());
         menuSettings->addAction(actionConnect);
@@ -157,14 +154,7 @@ public:
         action921600_bps_2->setText(QCoreApplication::translate("MainWindow", "921600", nullptr));
         action2000000bps->setText(QCoreApplication::translate("MainWindow", "2000000", nullptr));
         actionConnect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
-        textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">ello WOk</p></body></html>", nullptr));
+        actionTerminal->setText(QCoreApplication::translate("MainWindow", "Terminal", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuTools->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
         menuSettings->setTitle(QCoreApplication::translate("MainWindow", "Settings", nullptr));

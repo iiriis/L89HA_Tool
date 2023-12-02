@@ -1,8 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "terminal.h"
+
 #include <QtSerialport>
 #include <QMessageBox>
 #include <QRegularExpression>
+#include <QScrollBar>
+
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+
 
 /* Gloabl Serial Port object */
 QSerialPort serialPort;
@@ -13,21 +21,28 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    /* create the terminal window object, but dont show it */
+    tty = new terminal();
+
     /* initialise the widget states */
     initWidegtStates();
 
 
-    /* trigger when the Settings in menu bar is clicked */
+    /* trigger when the Settings in menu bar is about to open */
     connect(ui->menuPort, &QMenu::aboutToShow, this, &MainWindow::update_port_list);
 
     /* trigger when action of menu port or sub-menu of menu port is selected */
     connect(ui->menuPort, &QMenu::triggered, this, &MainWindow::onSerialPortSelected);
 
-    /* trigger when action of menu baud or sub-menu of menu baud is selected */
+    /* trigger when action (baud-rate) of sub-menu of menu baud is selected */
     connect(ui->menuBaud, &QMenu::triggered, this, &MainWindow::onBaudSelected);
 
-    /* Connect the readyRead() signal to a slot */
+    /* Connect the readyRead signal to a slot to read from the serial terminal */
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::handleSerialReceive);
+
+    /* Connect the serial-port error signal to a slot to indicate serial error*/
+    connect(&serialPort, &QSerialPort::errorOccurred, this, &MainWindow::handleSerialError);
+
 
 }
 
@@ -45,6 +60,25 @@ void MainWindow::initWidegtStates(){
     /* set the default baudRate of serial port to 115200 bps */
     serialPort.setBaudRate(QSerialPort::Baud115200);
 }
+
+/* Function to update the text Terminal with the new data */
+void MainWindow::processTextTerminal(QByteArray data) {
+
+    /* check if there is data and the terminal window is active */
+    if(data.length() > 0){
+        if(tty->textTerminal->isActiveWindow()){
+
+            /* move the cursor at the end reflecting the autoscroll effect */
+            tty->textTerminal->moveCursor(QTextCursor::End);
+
+            /* add the data to the terminal */
+            tty->textTerminal->insertPlainText(data);
+        }
+    }
+
+    qDebug() << data;
+}
+
 
 /* Callback whenever menu Port is going to open
  * This is to update the port list with everytime
@@ -144,19 +178,33 @@ void MainWindow::on_actionConnect_triggered()
     }
 }
 
+/* Callback function to open the serial terminal */
+void MainWindow::on_actionTerminal_triggered()
+{
+    tty->show();
+}
+
+
+/* Callback function to handle the Serial Port error */
+void MainWindow::handleSerialError(QSerialPort::SerialPortError error)
+{
+    if (error == QSerialPort::ResourceError) {
+        qDebug() << "Serial port disconnected!";
+        QMessageBox::critical(this, tr("Error"), "Serial Port Disconnected !");
+    }
+}
+
 /* Callback function to read the data from the Serial Port */
 void MainWindow::handleSerialReceive() {
-
-    QRegularExpression regex("[\\r\\n]");
 
     /* Read the data from the port */
     QByteArray data = serialPort.readAll();
 
-    /* Convert the data to a string */
-    QString stringData = QString::fromUtf8(data);
-
-    /* Print the string to the console */
-    qDebug() << stringData;
-
+    /* call the process Text terminal function to update the Text Terminal */
+    processTextTerminal(data);
 
 }
+
+
+
+

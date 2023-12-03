@@ -11,10 +11,6 @@
 #include <QLineEdit>
 #include <QPlainTextEdit>
 
-
-/* Gloabl Serial Port object */
-QSerialPort serialPort;
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -22,7 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     /* create the terminal window object, but dont show it */
-    tty = new terminal();
+    tty = new terminal(this);
+
+    /* set the terminal window as a new window (prevent clipped to parent window) */
+    tty->setWindowFlag(Qt::Window);
+
 
     /* initialise the widget states */
     initWidegtStates();
@@ -61,24 +61,8 @@ void MainWindow::initWidegtStates(){
     serialPort.setBaudRate(QSerialPort::Baud115200);
 }
 
-/* Function to update the text Terminal with the new data */
-void MainWindow::processTextTerminal(QByteArray data) {
 
-    /* check if there is data and the terminal window is active */
-    if(data.length() > 0){
-        if(tty->textTerminal->isActiveWindow()){
-
-            /* move the cursor at the end reflecting the autoscroll effect */
-            tty->textTerminal->moveCursor(QTextCursor::End);
-
-            /* add the data to the terminal */
-            tty->textTerminal->insertPlainText(data);
-        }
-    }
-
-    qDebug() << data;
-}
-
+/* ############################ Callback Handlers ############################### */
 
 /* Callback whenever menu Port is going to open
  * This is to update the port list with everytime
@@ -181,9 +165,9 @@ void MainWindow::on_actionConnect_triggered()
 /* Callback function to open the serial terminal */
 void MainWindow::on_actionTerminal_triggered()
 {
+    /* open the terminal window */
     tty->show();
 }
-
 
 /* Callback function to handle the Serial Port error */
 void MainWindow::handleSerialError(QSerialPort::SerialPortError error)
@@ -197,12 +181,12 @@ void MainWindow::handleSerialError(QSerialPort::SerialPortError error)
 /* Callback function to read the data from the Serial Port */
 void MainWindow::handleSerialReceive() {
 
+
     /* Read the data from the port */
-    QByteArray data = serialPort.readAll();
+    serialData = serialPort.readAll();
 
-    /* call the process Text terminal function to update the Text Terminal */
-    processTextTerminal(data);
-
+    /* emit the data received signal with the serial data */
+    emit dataReceived(serialData);
 }
 
 

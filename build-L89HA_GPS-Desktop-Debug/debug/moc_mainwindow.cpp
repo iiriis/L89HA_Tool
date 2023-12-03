@@ -40,10 +40,10 @@ namespace {
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {};
 static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::stringData(
     "MainWindow",
-    "initWidegtStates",
+    "dataReceived",
     "",
-    "processTextTerminal",
     "data",
+    "initWidegtStates",
     "update_port_list",
     "onSerialPortSelected",
     "QAction*",
@@ -60,10 +60,10 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     uint offsetsAndSizes[32];
     char stringdata0[11];
-    char stringdata1[17];
+    char stringdata1[13];
     char stringdata2[1];
-    char stringdata3[20];
-    char stringdata4[5];
+    char stringdata3[5];
+    char stringdata4[17];
     char stringdata5[17];
     char stringdata6[21];
     char stringdata7[9];
@@ -81,27 +81,27 @@ struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
 Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_stringdata_CLASSMainWindowENDCLASS = {
     {
         QT_MOC_LITERAL(0, 10),  // "MainWindow"
-        QT_MOC_LITERAL(11, 16),  // "initWidegtStates"
-        QT_MOC_LITERAL(28, 0),  // ""
-        QT_MOC_LITERAL(29, 19),  // "processTextTerminal"
-        QT_MOC_LITERAL(49, 4),  // "data"
-        QT_MOC_LITERAL(54, 16),  // "update_port_list"
-        QT_MOC_LITERAL(71, 20),  // "onSerialPortSelected"
-        QT_MOC_LITERAL(92, 8),  // "QAction*"
-        QT_MOC_LITERAL(101, 6),  // "action"
-        QT_MOC_LITERAL(108, 14),  // "onBaudSelected"
-        QT_MOC_LITERAL(123, 26),  // "on_actionConnect_triggered"
-        QT_MOC_LITERAL(150, 19),  // "handleSerialReceive"
-        QT_MOC_LITERAL(170, 17),  // "handleSerialError"
-        QT_MOC_LITERAL(188, 28),  // "QSerialPort::SerialPortError"
-        QT_MOC_LITERAL(217, 5),  // "error"
-        QT_MOC_LITERAL(223, 27)   // "on_actionTerminal_triggered"
+        QT_MOC_LITERAL(11, 12),  // "dataReceived"
+        QT_MOC_LITERAL(24, 0),  // ""
+        QT_MOC_LITERAL(25, 4),  // "data"
+        QT_MOC_LITERAL(30, 16),  // "initWidegtStates"
+        QT_MOC_LITERAL(47, 16),  // "update_port_list"
+        QT_MOC_LITERAL(64, 20),  // "onSerialPortSelected"
+        QT_MOC_LITERAL(85, 8),  // "QAction*"
+        QT_MOC_LITERAL(94, 6),  // "action"
+        QT_MOC_LITERAL(101, 14),  // "onBaudSelected"
+        QT_MOC_LITERAL(116, 26),  // "on_actionConnect_triggered"
+        QT_MOC_LITERAL(143, 19),  // "handleSerialReceive"
+        QT_MOC_LITERAL(163, 17),  // "handleSerialError"
+        QT_MOC_LITERAL(181, 28),  // "QSerialPort::SerialPortError"
+        QT_MOC_LITERAL(210, 5),  // "error"
+        QT_MOC_LITERAL(216, 27)   // "on_actionTerminal_triggered"
     },
     "MainWindow",
-    "initWidegtStates",
+    "dataReceived",
     "",
-    "processTextTerminal",
     "data",
+    "initWidegtStates",
     "update_port_list",
     "onSerialPortSelected",
     "QAction*",
@@ -129,11 +129,13 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    1,   68,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   68,    2, 0x08,    1 /* Private */,
-       3,    1,   69,    2, 0x08,    2 /* Private */,
+       4,    0,   71,    2, 0x08,    3 /* Private */,
        5,    0,   72,    2, 0x08,    4 /* Private */,
        6,    1,   73,    2, 0x08,    5 /* Private */,
        9,    1,   76,    2, 0x08,    7 /* Private */,
@@ -142,9 +144,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,    1,   81,    2, 0x08,   11 /* Private */,
       15,    0,   84,    2, 0x08,   13 /* Private */,
 
+ // signals: parameters
+    QMetaType::Void, QMetaType::QByteArray,    3,
+
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QByteArray,    4,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 7,    8,
     QMetaType::Void, 0x80000000 | 7,    8,
@@ -165,11 +169,11 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainWindowENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
+        // method 'dataReceived'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QByteArray &, std::false_type>,
         // method 'initWidegtStates'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'processTextTerminal'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QByteArray, std::false_type>,
         // method 'update_port_list'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'onSerialPortSelected'
@@ -197,8 +201,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->initWidegtStates(); break;
-        case 1: _t->processTextTerminal((*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[1]))); break;
+        case 0: _t->dataReceived((*reinterpret_cast< std::add_pointer_t<QByteArray>>(_a[1]))); break;
+        case 1: _t->initWidegtStates(); break;
         case 2: _t->update_port_list(); break;
         case 3: _t->onSerialPortSelected((*reinterpret_cast< std::add_pointer_t<QAction*>>(_a[1]))); break;
         case 4: _t->onBaudSelected((*reinterpret_cast< std::add_pointer_t<QAction*>>(_a[1]))); break;
@@ -225,6 +229,15 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QAction* >(); break;
             }
             break;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (MainWindow::*)(const QByteArray & );
+            if (_t _q_method = &MainWindow::dataReceived; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -257,5 +270,12 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 9;
     }
     return _id;
+}
+
+// SIGNAL 0
+void MainWindow::dataReceived(const QByteArray & _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP

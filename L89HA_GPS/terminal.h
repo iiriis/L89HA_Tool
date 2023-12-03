@@ -24,8 +24,13 @@ public:
     QPlainTextEdit *textTerminal;
 
 
+private slots:
+    void on_textInput_LineEdit_returnPressed();
+    void handleSerialDataReceive(const QByteArray& data);
+
 private:
     Ui::terminal *ui;
+    void setWindowSize();
 };
 
 #endif // TERMINAL_H

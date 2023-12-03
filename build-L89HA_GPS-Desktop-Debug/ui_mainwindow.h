@@ -17,6 +17,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -39,6 +40,7 @@ public:
     QAction *actionTerminal;
     QWidget *centralwidget;
     QGridLayout *gridLayout;
+    QTextBrowser *textBrowser;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuTools;
@@ -95,6 +97,11 @@ public:
         centralwidget->setObjectName("centralwidget");
         gridLayout = new QGridLayout(centralwidget);
         gridLayout->setObjectName("gridLayout");
+        textBrowser = new QTextBrowser(centralwidget);
+        textBrowser->setObjectName("textBrowser");
+
+        gridLayout->addWidget(textBrowser, 0, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");

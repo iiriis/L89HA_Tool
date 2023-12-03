@@ -18,11 +18,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    /* Global variable to store the serial data received */
+    QByteArray serialData;
+
+    /* Gloabl Serial Port object */
+    QSerialPort serialPort;
+
+
 private slots:
 
     void initWidegtStates();
-
-    void processTextTerminal(QByteArray data);
 
     void update_port_list();
 
@@ -36,6 +41,9 @@ private slots:
     void handleSerialError(QSerialPort::SerialPortError error);
 
     void on_actionTerminal_triggered();
+
+signals:
+    void dataReceived(const QByteArray& data);
 
 private:
     Ui::MainWindow *ui;

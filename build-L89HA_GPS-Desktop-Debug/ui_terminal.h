@@ -11,8 +11,15 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -20,20 +27,78 @@ QT_BEGIN_NAMESPACE
 class Ui_terminal
 {
 public:
-    QGridLayout *gridLayout;
+    QGridLayout *gridLayout_2;
+    QLabel *LineFeed;
+    QRadioButton *HEX_Radio_Button;
+    QSpacerItem *horizontalSpacer_2;
+    QLineEdit *textInput_LineEdit;
+    QCheckBox *autoscroll_CheckBox;
     QPlainTextEdit *textTerminal;
+    QSpacerItem *horizontalSpacer_3;
+    QRadioButton *ASCII_Radio_Button;
+    QComboBox *lineFeed_Combobox;
+    QButtonGroup *ASCII_HEX_radio_button_group;
 
     void setupUi(QWidget *terminal)
     {
         if (terminal->objectName().isEmpty())
             terminal->setObjectName("terminal");
-        terminal->resize(400, 300);
-        gridLayout = new QGridLayout(terminal);
-        gridLayout->setObjectName("gridLayout");
+        terminal->resize(769, 512);
+        gridLayout_2 = new QGridLayout(terminal);
+        gridLayout_2->setObjectName("gridLayout_2");
+        LineFeed = new QLabel(terminal);
+        LineFeed->setObjectName("LineFeed");
+
+        gridLayout_2->addWidget(LineFeed, 5, 5, 1, 1);
+
+        HEX_Radio_Button = new QRadioButton(terminal);
+        ASCII_HEX_radio_button_group = new QButtonGroup(terminal);
+        ASCII_HEX_radio_button_group->setObjectName("ASCII_HEX_radio_button_group");
+        ASCII_HEX_radio_button_group->addButton(HEX_Radio_Button);
+        HEX_Radio_Button->setObjectName("HEX_Radio_Button");
+
+        gridLayout_2->addWidget(HEX_Radio_Button, 5, 3, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_2, 5, 1, 1, 1);
+
+        textInput_LineEdit = new QLineEdit(terminal);
+        textInput_LineEdit->setObjectName("textInput_LineEdit");
+        textInput_LineEdit->setToolTipDuration(2000);
+
+        gridLayout_2->addWidget(textInput_LineEdit, 1, 0, 1, 7);
+
+        autoscroll_CheckBox = new QCheckBox(terminal);
+        autoscroll_CheckBox->setObjectName("autoscroll_CheckBox");
+
+        gridLayout_2->addWidget(autoscroll_CheckBox, 5, 0, 1, 1);
+
         textTerminal = new QPlainTextEdit(terminal);
         textTerminal->setObjectName("textTerminal");
 
-        gridLayout->addWidget(textTerminal, 0, 0, 1, 1);
+        gridLayout_2->addWidget(textTerminal, 2, 0, 1, 7);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_3, 5, 4, 1, 1);
+
+        ASCII_Radio_Button = new QRadioButton(terminal);
+        ASCII_HEX_radio_button_group->addButton(ASCII_Radio_Button);
+        ASCII_Radio_Button->setObjectName("ASCII_Radio_Button");
+
+        gridLayout_2->addWidget(ASCII_Radio_Button, 5, 2, 1, 1);
+
+        lineFeed_Combobox = new QComboBox(terminal);
+        lineFeed_Combobox->addItem(QString());
+        lineFeed_Combobox->addItem(QString());
+        lineFeed_Combobox->addItem(QString());
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8("applications-system")));
+        lineFeed_Combobox->addItem(icon, QString());
+        lineFeed_Combobox->addItem(QString());
+        lineFeed_Combobox->setObjectName("lineFeed_Combobox");
+
+        gridLayout_2->addWidget(lineFeed_Combobox, 5, 6, 1, 1);
 
 
         retranslateUi(terminal);
@@ -44,6 +109,19 @@ public:
     void retranslateUi(QWidget *terminal)
     {
         terminal->setWindowTitle(QCoreApplication::translate("terminal", "Form", nullptr));
+        LineFeed->setText(QCoreApplication::translate("terminal", "LineFeed", nullptr));
+        HEX_Radio_Button->setText(QCoreApplication::translate("terminal", "HEX", nullptr));
+#if QT_CONFIG(tooltip)
+        textInput_LineEdit->setToolTip(QCoreApplication::translate("terminal", "Hit Enter to Send Data", nullptr));
+#endif // QT_CONFIG(tooltip)
+        autoscroll_CheckBox->setText(QCoreApplication::translate("terminal", "AutoScroll", nullptr));
+        ASCII_Radio_Button->setText(QCoreApplication::translate("terminal", "ASCII", nullptr));
+        lineFeed_Combobox->setItemText(0, QCoreApplication::translate("terminal", "None", nullptr));
+        lineFeed_Combobox->setItemText(1, QCoreApplication::translate("terminal", "\\n (New Line)", nullptr));
+        lineFeed_Combobox->setItemText(2, QCoreApplication::translate("terminal", "\\r (Carriage Return)", nullptr));
+        lineFeed_Combobox->setItemText(3, QCoreApplication::translate("terminal", "\\n\\r (Both)", nullptr));
+        lineFeed_Combobox->setItemText(4, QString());
+
     } // retranslateUi
 
 };

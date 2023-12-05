@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "terminal.h"
+#include "gpsparser.h"
 
 #include <QtSerialport>
 #include <QMessageBox>
@@ -22,6 +23,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     /* set the terminal window as a new window (prevent clipped to parent window) */
     tty->setWindowFlag(Qt::Window);
+
+
+    /* move the parsing operations in a new thread */
+    QThread* parserThread = new QThread();
+    GPSParser *gpsparser = new GPSParser(this);
+    gpsparser->moveToThread(parserThread);
+    parserThread->start();
+
 
 
     /* initialise the widget states */

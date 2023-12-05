@@ -30,7 +30,7 @@ terminal::terminal(QWidget *parent) :
 
     ui->textTerminal->setMouseTracking(true);
 
-    /* Connect the readyRead signal to a slot to read from the serial terminal */
+    /* Connect the datareceived signal to a slot to get the data from mainwindow */
     connect(mainWindow, &MainWindow::dataReceived, this, &terminal::handleSerialDataReceive);
 
 }

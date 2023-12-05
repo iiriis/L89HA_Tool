@@ -68,7 +68,39 @@ void terminal::setWindowSize()
 
 void terminal::on_textInput_LineEdit_returnPressed()
 {
-    ui->textTerminal->insertPlainText("Sent:\n");
+    QColor originalColor = ui->textTerminal->textColor(); // store the original text color
+    QString linefeed = "";
+
+
+
+    QString buff = ui->textInput_LineEdit->text();
+
+
+    switch (ui->lineFeed_Combobox->currentIndex()){
+    case 0: linefeed = "";
+        break;
+    case 1: linefeed = "\n";
+        break;
+    case 2: linefeed = "\r";
+        break;
+    case 3: linefeed = "\n\r";
+        break;
+    }
+
+    buff.append(linefeed);
+
+    ui->textTerminal->setTextColor(Qt::green);
+
+    ui->textTerminal->insertPlainText("Sent:\n"+buff);
+
+    QByteArray bytearray = buff.toUtf8();
+
+    ui->textTerminal->setTextColor(originalColor);
+
+    mainWindow->serialPort.write(bytearray);
+    mainWindow->serialPort.waitForBytesWritten(1000);
+
+
 }
 
 /* Function to update the text Terminal with the new data on arrival*/
